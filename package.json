@@ -2,7 +2,9 @@
   "name": "my-list",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://my-link-list.herokuapp.com/",
   "dependencies": {
+    "axios": "^0.18.0",
     "history": "^4.7.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
