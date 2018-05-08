@@ -5,7 +5,7 @@ TEST_ACTION
 const initialState = {
 	test_action : 0,
 	snapdragon : false,
-	links : [{title : "1"}]
+	links : []
 }
 
 export default (state = initialState, action ) =>{

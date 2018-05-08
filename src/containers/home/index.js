@@ -7,21 +7,7 @@ import {
 	test_action_action
 } from '../../actions/basic_actions'
 
-import { withStyles } from 'material-ui/styles';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-
-
-
-const style = {
-  height: 0,
-  paddingTop: '46.25%'
-};
-
-const card =  {
-    maxWidth: 345,
-  };
+import LinkCard from '../linkCards'
 
 
 const Home = props => (
@@ -38,42 +24,9 @@ const Home = props => (
 
     {
     	props.links.map((link,index)=>(
-		    <div style = {{width:"350px"}}>
-		      <Card style={card}>
-		        <CardMedia
-		          style = {style}
-		          image={link.image}
-		          title={link.title}
-		        />
-		        <CardContent>
-		          <Typography gutterBottom variant="headline" component="h2">
-		            {link.title}
-		          </Typography>
-		          <Typography component="p">
-		           {link.description}
-		          </Typography>
-		        </CardContent>
-		        <CardActions>
-		          <Button size="small" color="primary">
-		            Share
-		          </Button>
-		          <Button size="small" color="primary">
-		            Learn More
-		          </Button>
-		        </CardActions>
-		      </Card>
-		    </div>
-
-
-
-
-
-
-
-
-    	))
+    		<LinkCard link_data={link} key={index}/>
+  		))
     }
-
   </div>
 )
 
