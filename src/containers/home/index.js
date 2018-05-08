@@ -7,6 +7,23 @@ import {
 	test_action_action
 } from '../../actions/basic_actions'
 
+import { withStyles } from 'material-ui/styles';
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
+
+
+
+const style = {
+  height: 0,
+  paddingTop: '46.25%'
+};
+
+const card =  {
+    maxWidth: 345,
+  };
+
+
 const Home = props => (
   <div>
     <h1>Home</h1>
@@ -21,17 +38,39 @@ const Home = props => (
 
     {
     	props.links.map((link,index)=>(
-    		<p>
-		    	<div key={index}>
-		    		<br/>{link.title}
-		    		<br/>{link.owner}
-		    		<br/><a href={link.url}>{link.url}</a> 
-		    		<br/>{link.author}
-		    		<br/>{link.description}
-		    		<br/><img src={link.image} alt="lol"/>
-		    		<br/>{link.publisher}
-		    	</div>
-		    </p>	
+		    <div style = {{width:"350px"}}>
+		      <Card style={card}>
+		        <CardMedia
+		          style = {style}
+		          image={link.image}
+		          title={link.title}
+		        />
+		        <CardContent>
+		          <Typography gutterBottom variant="headline" component="h2">
+		            {link.title}
+		          </Typography>
+		          <Typography component="p">
+		           {link.description}
+		          </Typography>
+		        </CardContent>
+		        <CardActions>
+		          <Button size="small" color="primary">
+		            Share
+		          </Button>
+		          <Button size="small" color="primary">
+		            Learn More
+		          </Button>
+		        </CardActions>
+		      </Card>
+		    </div>
+
+
+
+
+
+
+
+
     	))
     }
 
