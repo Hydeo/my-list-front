@@ -8,11 +8,11 @@ import Typography from 'material-ui/Typography';
 
 const styles = {
   card: {
-    maxWidth: 345,
+    maxWidth: "300px"
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '46.25%', // 16:9
   },
 };
 
@@ -25,7 +25,7 @@ class LinkCard extends React.Component{
 		const { classes, link_data} = this.props;
 		
 		return (
-		<div>
+		<div className="link_item">
 	      <Card className={classes.card}>
 	        <CardMedia
 	          className={classes.media}

@@ -1,5 +1,6 @@
 import { 
-TEST_ACTION
+GET_LIST_LINKS,
+UPDATE_ISOTOPE
 } from '../actions/basic_actions';
 
 const initialState = {
@@ -11,15 +12,18 @@ const initialState = {
 export default (state = initialState, action ) =>{
 	switch(action.type){
 
-		case TEST_ACTION:
-			console.log("In Reducer " + state.test_action + " - " + state.snapdragon);
-			console.log(action.payload.data);
-			return{
-				...state,
-				test_action : state.test_action +  1,
-				snapdragon : !state.snapdragon,
-				links : action.payload.data
-			}
+		case GET_LIST_LINKS:
+				return{
+					...state,
+					test_action : state.test_action +  1,
+					snapdragon : !state.snapdragon,
+					links : action.payload.data
+				}
+			break;
+		case UPDATE_ISOTOPE:
+			return state;
+			break;
+
 
 		default:
 			return state;

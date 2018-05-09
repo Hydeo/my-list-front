@@ -4,10 +4,11 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
-	test_action_action
+	get_list_links
 } from '../../actions/basic_actions'
 
 import LinkCard from '../linkCards'
+import LinkList from '../linkList'
 
 
 const Home = props => (
@@ -16,34 +17,20 @@ const Home = props => (
     <p>Welcome home!</p>
     <button onClick={() => props.changePage()}>Go to about page via redux</button>
 
-    <button onClick={props.test_action_action}>ACTION!!</button>
+    <button onClick={props.get_list_links}>ACTION!!</button>
 
-    <p>Action count : {props.test_action}</p>
-    <p>Snapdragon : {props.snapdragon.toString()}</p>
-
-
-    {
-    	props.links.map((link,index)=>(
-    		<LinkCard link_data={link} key={index}/>
-  		))
-    }
+   	<LinkList/>
   </div>
 )
 
-//On recupere la tate dans les props
-const mapStateToProps = state =>({
-	test_action : state.bim.test_action,
-	snapdragon : state.bim.snapdragon,
-	links : state.bim.links
-})
 
 //On injecte les actions possible au props ?
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/about-us'),
-  test_action_action
+  get_list_links
 }, dispatch)
 
 export default connect(
-  mapStateToProps, 
+  null, 
   mapDispatchToProps
 )(Home)
