@@ -19,12 +19,13 @@ class LinkList extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			first_render : true
+			first_render : true,
+			isotope_instance : null
 		}
 	}
 
 	render(){
-		console.log("render");
+		console.log("-- render LinkList --");
 		return(
 			  <div id="link_list">
 			    {
@@ -46,27 +47,45 @@ class LinkList extends React.Component{
 	}
 
 	componentDidUpdate = (prevProps, prevState, snapshot) =>{
-		console.log("Did Update");
-		this.props.update_isotope(()=>{this.init_Isotope()});
+		console.log("-- componentDidUpdate --");
+		this.props.update_isotope(()=>{this.update_isotope()});
 	}
 
 
+	update_isotope(){
+		console.log("-- update_isotope --");
+		if(this.state.isotope_instance == null){
+			console.log("-- update_isotope -- call init --");
+			this.init_Isotope();
+		}
+		else{
+			console.log("-- update_isotope -- update layout--");
+			console.log(this.state);
+			this.state.isotope_instance.layout();
+			//this.state>isotope_instance.arrange();
+		}
+	}
 
 	init_Isotope(){
+		console.log("-- init_Isotope --");
 		var iso_link_list ;
 		var link_list = document.querySelector('#link_list');
 		//ImagesLoaded("#link_list"),()=>{
-			iso_link_list = new Isotope(link_list,{
-					itemSelector : '.link_item',
-					masonry : {
-						 columnWidth: 300,
-					}
-				})
+		iso_link_list = new Isotope(link_list,{
+				itemSelector : '.link_item',
+				masonry : {
+					 columnWidth: 300,
+				}
+			})
+		this.setState((previousState, new_iso_instance)=>{
+			return{isotope_instance : iso_link_list};
+		})
 		//}
-		iso_link_list.layout();
-		iso_link_list.arrange();
+		//iso_link_list.layout();
+		//iso_link_list.arrange();
 	}
 }
+
 //On recupere la tate dans les props
 const mapStateToProps = state =>({
 	test_action : state.bim.test_action,
