@@ -15,7 +15,8 @@ import Icon from 'material-ui/Icon';
 
 import Utils from '../../modules/utils.js'
 import {
-	get_list_links
+	get_list_links,
+  add_link
 } from '../../actions/basic_actions'
 
 import LinkCard from '../linkCards'
@@ -34,6 +35,7 @@ const styles = theme => ({
   },
 });
 
+const class_name = "Home";
 
 class Home extends React.Component{
 
@@ -45,8 +47,6 @@ class Home extends React.Component{
       url_input_has_been_used : false
     };
   }
-
-  
 
   handleChange = event => {
     this.setState({ url_to_add: event.target.value, url_input_has_been_used : true });
@@ -60,10 +60,10 @@ class Home extends React.Component{
 
   render(){
     const { classes } = this.props;
-    console.log(!this.state.url_to_add && this.state.url_input_has_been_used)
     return(
         <div>
           <h1>Home</h1>
+          <button onClick={() => this.props.changePage()}>[TEST] Change Page</button>
           <FormControl className={classes.formControl}>
                 <InputLabel htmlFor="name-simple">Url To Add</InputLabel>
                 <Input id="name-simple" error={!this.state.is_url_valide && this.state.url_input_has_been_used} placeholder="http(s):\\" value={this.state.url_to_add} onChange={this.handleChange} />
@@ -71,19 +71,17 @@ class Home extends React.Component{
                   <FormHelperText id="name-error-text">Non valid URL</FormHelperText>
                 }
           </FormControl>
-          <Button variant="fab" mini disabled={!this.state.is_url_valide} color="secondary" aria-label="edit" className={classes.button}>
+          <Button variant="fab" mini disabled={!this.state.is_url_valide} onClick={()=>{this.props.add_link(this.state.url_to_add)}} color="secondary" aria-label="edit" className={classes.button}>
                   <Icon>send</Icon>
-          </Button>
-          <p>Welcome home!</p>
-          <button onClick={() => this.props.changePage()}>Go to about page via redux</button>
-          <button onClick={this.props.get_list_links}>ACTION!!</button>
+          </Button>          
+          <button onClick={this.props.get_list_links}>Load List</button>
          	<LinkList/>
         </div>
       )
   }
 
   componentDidMount(){
-    console.log("-- CompoDidMount -- ");
+    console.log("--["+class_name+"] componentWillReceiveProps --")
     if(this.state.is_first_render){
       this.setState({is_first_render : false});
     }
@@ -97,7 +95,8 @@ Home.propTypes = {
 //On injecte les actions possible au props ?
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/about-us'),
-  get_list_links
+  get_list_links,
+  add_link : (url) => add_link(url) 
 }, dispatch)
 
 

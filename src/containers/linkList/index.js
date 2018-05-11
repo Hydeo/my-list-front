@@ -13,6 +13,7 @@ import {
 
 import LinkCard from '../linkCards'
 
+const class_name = "LinkList";
 
 class LinkList extends React.Component{
 
@@ -25,7 +26,7 @@ class LinkList extends React.Component{
 	}
 
 	render(){
-		console.log("-- render LinkList --");
+		console.log("--["+class_name+"] Render --")
 		return(
 			  <div id="link_list">
 			    {
@@ -39,21 +40,28 @@ class LinkList extends React.Component{
 
 
 	componentDidMount = ()=>{
-		console.log("Did Mount");
+		console.log("--["+class_name+"] componentDidMount--");
+	}
+
+	componentWillReceiveProps = () =>{
+		console.log("--["+class_name+"] componentWillReceiveProps --")
+		
 	}
 
 	shouldComponentUpdate = (nextProps,nextState)=>{
+		console.log("--["+class_name+"] shouldComponentUpdate -- "+(this.state.isotope_instance == null ? "true" : "false"))
+		//return this.state.isotope_instance == null ? true : false;
 		return true;
 	}
 
 	componentDidUpdate = (prevProps, prevState, snapshot) =>{
-		console.log("-- componentDidUpdate --");
+		console.log("--["+class_name+"] componentDidUpdate --")
 		this.props.update_isotope(()=>{this.update_isotope()});
 	}
 
 
 	update_isotope(){
-		console.log("-- update_isotope --");
+		
 		if(this.state.isotope_instance == null){
 			console.log("-- update_isotope -- call init --");
 			this.init_Isotope();
@@ -61,8 +69,9 @@ class LinkList extends React.Component{
 		else{
 			console.log("-- update_isotope -- update layout--");
 			console.log(this.state);
+			this.state.isotope_instance.reloadItems()
 			this.state.isotope_instance.layout();
-			//this.state>isotope_instance.arrange();
+			this.state.isotope_instance.arrange();
 		}
 	}
 

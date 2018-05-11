@@ -12,7 +12,8 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          To get started, editsrc/App.js and save to reload.
+         Here, it's all about Link
+         <img src="https://media.giphy.com/media/144Q1gg0FkTEVG/giphy.gif" alt="Dam link, where are you?"/>
         </p>
       </div>
     );

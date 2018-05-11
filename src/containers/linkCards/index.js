@@ -19,7 +19,6 @@ const styles = {
 
 class LinkCard extends React.Component{
 	render(){
-		console.log(this.props);
 		const { classes, link_data} = this.props;
 		
 		return (
