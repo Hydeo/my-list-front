@@ -24,17 +24,17 @@ export default (state = initialState, action ) =>{
 			break;
 
 		case ADD_LINK:
-			var new_links_array = state.links;
-			console.log(new_links_array);
+			/*var new_links_array = state.links;
+			console.log( state.links);
 			new_links_array.unshift(action.payload.data);
-			console.log(new_links_array);
+			console.log( state.links);*/
 			return{
 					...state,
-					links : new_links_array,
+					links : [action.payload.data , ...state.links],
 					last_added_link : action.payload.data 
 				}
 			break;
-			
+
 		case UPDATE_ISOTOPE:
 			return state;
 			break;
