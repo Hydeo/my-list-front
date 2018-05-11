@@ -49,7 +49,7 @@ class LinkList extends React.Component{
 	}
 
 	shouldComponentUpdate = (nextProps,nextState)=>{
-		console.log("--["+class_name+"] shouldComponentUpdate -- "+(this.state.isotope_instance == null ? "true" : "false"))
+		//console.log("--["+class_name+"] shouldComponentUpdate -- "+(this.state.isotope_instance == null ? "true" : "false"))
 		//return this.state.isotope_instance == null ? true : false;
 		return true;
 	}
