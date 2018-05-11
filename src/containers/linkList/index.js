@@ -84,6 +84,7 @@ class LinkList extends React.Component{
 				itemSelector : '.link_item',
 				masonry : {
 					 columnWidth: 300,
+					 gutter : 10
 				}
 			})
 		this.setState((previousState, new_iso_instance)=>{
