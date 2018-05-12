@@ -15,6 +15,15 @@ import LinkCard from '../linkCards'
 
 const class_name = "LinkList";
 
+const link_sizer = {
+    width: "17%"
+  }
+const link_gutter = {
+    width: "3.75%"
+  }
+
+
+
 class LinkList extends React.Component{
 
 	constructor(props){
@@ -26,9 +35,13 @@ class LinkList extends React.Component{
 	}
 
 	render(){
+		console.log((100 - (5 * 17)) / 5);
+		const { classes} = this.props;
 		console.log("--["+class_name+"] Render --")
 		return(
 			  <div id="link_list">
+			  	<div  style={link_sizer} className="link_sizer"/>
+			  	<div  style={link_gutter} className="link_gutter"/>
 			    {
 			    	this.props.links.map((link,index)=>(
 			    		<LinkCard link_data={link} key={index}/>
@@ -81,10 +94,11 @@ class LinkList extends React.Component{
 		var link_list = document.querySelector('#link_list');
 		//ImagesLoaded("#link_list"),()=>{
 		iso_link_list = new Isotope(link_list,{
-				itemSelector : '.link_item',
+				itemSelector : ".link_item",
+				percentPosition: true,
 				masonry : {
-					 columnWidth: 300,
-					 gutter : 10
+					 columnWidth: ".link_sizer",
+					 gutter : ".link_gutter"
 				}
 			})
 		this.setState((previousState, new_iso_instance)=>{
@@ -107,6 +121,8 @@ const mapStateToProps = state =>({
 const mapDispatchToProps = dispatch => bindActionCreators({
   update_isotope
 }, dispatch)
+
+
 
 export default connect(
   mapStateToProps, 

@@ -7,9 +7,11 @@ import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 
 const styles = {
+  card_size : {
+  	width : "17%"
+  },
   card: {
-    maxWidth: "300px",
-    marginBottom: "10px"
+    marginBottom: "15px"
   },
   media: {
     height: 0,
@@ -23,7 +25,7 @@ class LinkCard extends React.Component{
 		const { classes, link_data} = this.props;
 		
 		return (
-		<div className="link_item">
+		<div className={classes.card_size + " link_item "}>
 	      <Card className={classes.card}>
 	        <CardMedia
 	          className={classes.media}
