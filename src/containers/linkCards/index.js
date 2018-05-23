@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Collapse from 'material-ui/transitions/Collapse';
 import Button from 'material-ui/Button';
 
 import { withStyles } from 'material-ui/styles';
@@ -21,6 +22,11 @@ const styles = {
 
 
 class LinkCard extends React.Component{
+	state = { expanded: false };
+	handleExpandClick = () => {
+	    this.setState({ expanded: !this.state.expanded });
+	  };
+
 	render(){
 		const { classes, link_data} = this.props;
 		
@@ -36,16 +42,20 @@ class LinkCard extends React.Component{
 	          <Typography gutterBottom variant="headline" component="h2">
 	            {link_data.title}
 	          </Typography>
-	          <Typography component="p">
-	            {link_data.description}
-	          </Typography>
 	        </CardContent>
+	        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+		        <CardContent>
+		          <Typography component="p">
+		            {link_data.description}
+		          </Typography>
+		        </CardContent>
+		    </Collapse>
 	        <CardActions>
 	          <Button size="small" color="primary">
 	            Share
 	          </Button>
-	          <Button size="small" color="primary">
-	            Learn More
+	          <Button onClick={this.handleExpandClick} size="small" color="primary">
+	            Open
 	          </Button>
 	        </CardActions>
 	      </Card>
