@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Grid from 'material-ui/Grid';
+import Grid from '@material-ui/core/Grid';
 
 
 class App extends Component {

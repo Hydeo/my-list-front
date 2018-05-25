@@ -1,11 +1,19 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import {
+	update_isotope
+} from '../../actions/basic_actions'
 
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-import Collapse from 'material-ui/transitions/Collapse';
-import Button from 'material-ui/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Collapse from '@material-ui/core/Collapse';
+import Button from '@material-ui/core/Button';
 
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
   card_size : {
@@ -22,10 +30,19 @@ const styles = {
 
 
 class LinkCard extends React.Component{
-	state = { expanded: false };
+
+	constructor(props){
+		super(props);
+		this.state = {
+			expanded: false
+		}
+		console.log(props)
+	}
+
 	handleExpandClick = () => {
 	    this.setState({ expanded: !this.state.expanded });
-	  };
+	    this.props.isotopeUpdate();
+	};
 
 	render(){
 		const { classes, link_data} = this.props;
@@ -64,5 +81,13 @@ class LinkCard extends React.Component{
 	}
 }
 
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  update_isotope
+}, dispatch)
+
 const compoStyled = withStyles(styles)(LinkCard);
-export default compoStyled;
+export default connect(
+  null, 
+  mapDispatchToProps
+)(compoStyled)

@@ -44,7 +44,7 @@ class LinkList extends React.Component{
 			  	<div  style={link_gutter} className="link_gutter"/>
 			    {
 			    	this.props.links.map((link,index)=>(
-			    		<LinkCard link_data={link} key={index}/>
+			    		<LinkCard link_data={link} key={index} isotopeUpdate={this.update_isotope} />
 			  		))
 			    }
 			  </div>
@@ -74,7 +74,6 @@ class LinkList extends React.Component{
 
 
 	update_isotope(){
-		
 		if(this.state.isotope_instance == null){
 			console.log("-- update_isotope -- call init --");
 			this.init_Isotope();
