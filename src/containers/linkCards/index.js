@@ -5,7 +5,7 @@ import {
 	update_isotope
 } from '../../actions/basic_actions'
 import {conf_dev} from '../../config';
-import {getTypeSizeScreen} from '../../utils'
+import {getTypeSizeScreen, calculateIsotopeItemWidth} from '../../utils'
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -17,17 +17,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-const calculateIsotopeItemWidth = (nb_item,gutter_size)=>{
-	var nb_gutters = nb_item-1;
-	var item_width = (100 - (nb_gutters * gutter_size)) / nb_item;
-	return item_width;
-}
-
-
 const styles = {
-  card_size : {
-  	width : calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
-  },
   card: {
     marginBottom: "15px"
   },
@@ -43,12 +33,17 @@ class LinkCard extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			expanded: false
+			expanded: false,
+			card_size : {
+				width : calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
+			}
 		}
 	}
 
 	handleExpandClick = () => {
-	    this.setState({ expanded: !this.state.expanded });
+	    this.setState({ 
+	    	expanded: !this.state.expanded 
+	    });
 	};
 
 	update_isotope_layout = ()=>{
@@ -57,11 +52,9 @@ class LinkCard extends React.Component{
 
 
 	render(){
-		console.log("Render link")
-		console.log(this.props)
-		const { classes, link_data} = this.props;
+		const {classes, link_data} = this.props;
 		return (
-		<div className={classes.card_size + " link_item "}>
+		<div className={" link_item "} style={this.props.cardSize}>
 	      <Card className={classes.card}>
 	        <CardMedia
 	          className={classes.media}

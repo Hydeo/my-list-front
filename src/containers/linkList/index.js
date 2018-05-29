@@ -13,27 +13,15 @@ import {
 } from '../../actions/basic_actions'
 
 import {conf_dev} from '../../config';
-import {getTypeSizeScreen} from '../../utils'
+import {getTypeSizeScreen,calculateIsotopeItemWidth} from '../../utils'
 import LinkCard from '../linkCards'
 
 const class_name = "LinkList";
 
 
-const calculateIsotopeItemWidth = (nb_item,gutter_size)=>{
-	var nb_gutters = nb_item-1;
-	var item_width = (100 - (nb_gutters * gutter_size)) / nb_item;
-	return item_width;
-}
-
-const link_sizer = {
-    width: calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
-  }
-
 const link_gutter = {
     width: "3%"
   }
-
-
 
 class LinkList extends React.Component{
 
@@ -41,25 +29,32 @@ class LinkList extends React.Component{
 		super(props);
 		this.state = {
 			first_render : true,
-			isotope_instance : null
+			isotope_instance : null,
+			link_size_state : {
+				width : calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
+			}
 		}
-		console.log(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)]);
-		console.log(calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3));
+	}
+
+	updateDimensions = ()=>{
+		if(!this.state.first_render){
+			//TODO : Debounce ?
+			this.setState({link_size_state : {
+					width : calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
+				}
+			});
+		}
 	}
 
 	render(){
-		console.log((100 - (5 * 17)) / 5);
-
-		console.log(this.props);
-		const { classes} = this.props;
-		console.log("--["+class_name+"] Render --")
+		const {classes} = this.props;
 		return(
 			  <div id="link_list">
-			  	<div  style={link_sizer} className="link_sizer"/>
+			  	<div  style={this.state.link_size_state} className="link_sizer"/>
 			  	<div  style={link_gutter} className="link_gutter"/>
 			    {
 			    	this.props.links.map((link,index)=>(
-			    		<LinkCard link_data={link} key={index} isotopeUpdate={this.update_isotope} />
+			    		<LinkCard link_data={link} key={index} isotopeUpdate={this.update_isotope} cardSize={this.state.link_size_state}/>
 			  		))
 			    }
 			  </div>
@@ -68,12 +63,17 @@ class LinkList extends React.Component{
 
 
 	componentDidMount = ()=>{
-		console.log("--["+class_name+"] componentDidMount--");
+		//console.log("--["+class_name+"] componentDidMount--");
+		window.addEventListener("resize", this.updateDimensions);
+		this.setState({first_render: false});
 	}
+	
+	componentWillUnmount() {
+    	window.removeEventListener("resize", this.updateDimensions);
+  	}
 
 	componentWillReceiveProps = () =>{
-		console.log("--["+class_name+"] componentWillReceiveProps --")
-		
+		//console.log("--["+class_name+"] componentWillReceiveProps --")
 	}
 
 	shouldComponentUpdate = (nextProps,nextState)=>{
@@ -83,8 +83,8 @@ class LinkList extends React.Component{
 	}
 
 	componentDidUpdate = (prevProps, prevState, snapshot) =>{
-		console.log("--["+class_name+"] componentDidUpdate --")
-		console.log(this.props);
+		//console.log("--["+class_name+"] componentDidUpdate --")
+		//console.log(this.props);
 		this.props.update_isotope(this.props.isotope_instance);
 	}
 

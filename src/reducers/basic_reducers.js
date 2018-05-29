@@ -25,10 +25,6 @@ export default (state = initialState, action ) =>{
 			break;
 
 		case ADD_LINK:
-			/*var new_links_array = state.links;
-			console.log( state.links);
-			new_links_array.unshift(action.payload.data);
-			console.log( state.links);*/
 			return{
 					...state,
 					links : [action.payload.data , ...state.links],
@@ -41,8 +37,6 @@ export default (state = initialState, action ) =>{
 			break;
 
 		case SET_ISOTOPE:
-			console.log("-- Set G State Iso --")
-			console.log(action.payload)
 			return{
 					...state,
 					isotope_instance : action.payload
