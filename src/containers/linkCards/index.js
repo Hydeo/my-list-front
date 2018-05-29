@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import {
 	update_isotope
 } from '../../actions/basic_actions'
+import {conf_dev} from '../../config';
+import {getTypeSizeScreen} from '../../utils'
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -15,9 +17,16 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
+const calculateIsotopeItemWidth = (nb_item,gutter_size)=>{
+	var nb_gutters = nb_item-1;
+	var item_width = (100 - (nb_gutters * gutter_size)) / nb_item;
+	return item_width;
+}
+
+
 const styles = {
   card_size : {
-  	width : "17%"
+  	width : calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
   },
   card: {
     marginBottom: "15px"

@@ -12,15 +12,25 @@ import {
 	set_isotope
 } from '../../actions/basic_actions'
 
+import {conf_dev} from '../../config';
+import {getTypeSizeScreen} from '../../utils'
 import LinkCard from '../linkCards'
 
 const class_name = "LinkList";
 
+
+const calculateIsotopeItemWidth = (nb_item,gutter_size)=>{
+	var nb_gutters = nb_item-1;
+	var item_width = (100 - (nb_gutters * gutter_size)) / nb_item;
+	return item_width;
+}
+
 const link_sizer = {
-    width: "17%"
+    width: calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
   }
+
 const link_gutter = {
-    width: "3.75%"
+    width: "3%"
   }
 
 
@@ -33,10 +43,13 @@ class LinkList extends React.Component{
 			first_render : true,
 			isotope_instance : null
 		}
+		console.log(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)]);
+		console.log(calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3));
 	}
 
 	render(){
 		console.log((100 - (5 * 17)) / 5);
+
 		console.log(this.props);
 		const { classes} = this.props;
 		console.log("--["+class_name+"] Render --")
