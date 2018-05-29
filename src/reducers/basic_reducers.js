@@ -1,7 +1,8 @@
 import { 
 GET_LIST_LINKS,
 ADD_LINK,
-UPDATE_ISOTOPE
+UPDATE_ISOTOPE,
+SET_ISOTOPE
 } from '../actions/basic_actions';
 
 const initialState = {
@@ -37,6 +38,15 @@ export default (state = initialState, action ) =>{
 
 		case UPDATE_ISOTOPE:
 			return state;
+			break;
+
+		case SET_ISOTOPE:
+			console.log("-- Set G State Iso --")
+			console.log(action.payload)
+			return{
+					...state,
+					isotope_instance : action.payload
+				}
 			break;
 
 

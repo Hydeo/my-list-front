@@ -36,17 +36,21 @@ class LinkCard extends React.Component{
 		this.state = {
 			expanded: false
 		}
-		console.log(props)
 	}
 
 	handleExpandClick = () => {
 	    this.setState({ expanded: !this.state.expanded });
-	    this.props.isotopeUpdate();
 	};
 
+	update_isotope_layout = ()=>{
+		this.props.isotope_instance.layout();
+	}
+
+
 	render(){
+		console.log("Render link")
+		console.log(this.props)
 		const { classes, link_data} = this.props;
-		
 		return (
 		<div className={classes.card_size + " link_item "}>
 	      <Card className={classes.card}>
@@ -60,7 +64,7 @@ class LinkCard extends React.Component{
 	            {link_data.title}
 	          </Typography>
 	        </CardContent>
-	        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+	        <Collapse in={this.state.expanded} onExited={()=>{this.update_isotope_layout();console.log("Transition ended")}} onEntered={()=>{this.update_isotope_layout();console.log("Transition Entered")}} timeout="auto" unmountOnExit>
 		        <CardContent>
 		          <Typography component="p">
 		            {link_data.description}
@@ -79,7 +83,17 @@ class LinkCard extends React.Component{
 	    </div>
 		)
 	}
+
+	componentDidUpdate = ()=>{
+	}
+
 }
+
+
+//On recupere la tate dans les props
+const mapStateToProps = state =>({
+	isotope_instance : state.bim.isotope_instance
+})
 
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -88,6 +102,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 const compoStyled = withStyles(styles)(LinkCard);
 export default connect(
-  null, 
+  mapStateToProps, 
   mapDispatchToProps
 )(compoStyled)
