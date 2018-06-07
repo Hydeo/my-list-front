@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
@@ -44,6 +43,7 @@ class Home extends React.Component{
 
   constructor(props){
     super(props);
+    console.log(this.props)
     this.state = {
       url_to_add: '',
       is_url_valide : false,
@@ -94,7 +94,7 @@ class Home extends React.Component{
             </Grid>
             <Grid container justify="center" spacing={8}>
                 <Grid key="1" item>
-                  <Button variant="fab" mini disabled={!this.state.is_url_valide} onClick={()=>{this.props.add_link(this.state.url_to_add)}} color="secondary" aria-label="edit" className={classes.button}>
+                  <Button variant="fab" mini disabled={!this.state.is_url_valide} onClick={()=>{this.props.add_link(this.state.url_to_add,this.props.user_name)}} color="secondary" aria-label="edit" className={classes.button}>
                     <Icon>send</Icon>
                   </Button>  
                 </Grid>
@@ -126,16 +126,20 @@ Home.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
+const mapStateToProps = state =>({
+  user_name : state.user.user_name
+})
+
 //On injecte les actions possible au props ?
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/about-us'),
   get_list_links,
-  add_link : (url) => add_link(url) 
+  add_link : (url,owner) => add_link(url,owner) 
 }, dispatch)
 
 
 var Home_ws = withStyles(styles)(Home);
 export default connect(
-  null, 
+  mapStateToProps, 
   mapDispatchToProps
 )(Home_ws)

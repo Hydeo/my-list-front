@@ -7,7 +7,8 @@ export const INIT_ISOTOPE = 'INIT_ISOTOPE'
 export const UPDATE_ISOTOPE = 'UPDATE_ISOTOPE'
 export const SET_ISOTOPE = 'SET_ISOTOPE'
 
-export const URL_API = "https://my-link-list.herokuapp.com";
+//export const URL_API = "https://my-link-list.herokuapp.com";
+export const URL_API = "http://localhost:8080";
 export const LIST_NAME = "Hideo";
 
 export const get_list_links = ()=>{
@@ -25,13 +26,14 @@ export const get_list_links = ()=>{
 	}
 }
 
-export const add_link = (url) =>{
+export const add_link = (url,owner) =>{
 
 	const data = {
       url: url
     };
+    console.log(owner)
 	return dispatch =>{
-		return axios.post(URL_API+"/"+LIST_NAME,data)
+		return axios.post(URL_API+"/"+owner+"/lol",data)
 			.then(
 				(request)=>{
 					dispatch({
@@ -59,8 +61,6 @@ export const update_isotope = (iso_instance = null) =>{
 					}
 				})
 			//}
-			//iso_link_list.layout();
-			//iso_link_list.arrange();
 			dispatch({
 				type : SET_ISOTOPE,
 				payload: iso_link_list

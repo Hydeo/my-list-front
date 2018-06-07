@@ -66,7 +66,7 @@ class LinkCard extends React.Component{
 	            {link_data.title}
 	          </Typography>
 	        </CardContent>
-	        <Collapse in={this.state.expanded} onExited={()=>{this.update_isotope_layout();console.log("Transition ended")}} onEntered={()=>{this.update_isotope_layout();console.log("Transition Entered")}} timeout="auto" unmountOnExit>
+	        <Collapse in={this.state.expanded} onExited={()=>{this.update_isotope_layout()}} onEntered={()=>{this.update_isotope_layout()}} timeout="auto" unmountOnExit>
 		        <CardContent>
 		          <Typography component="p">
 		            {link_data.description}
