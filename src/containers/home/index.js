@@ -2,6 +2,7 @@ import React from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -49,6 +50,7 @@ class Home extends React.Component{
       is_url_valide : false,
       url_input_has_been_used : false
     };
+    console.log("construct home")
   }
 
   handleChange = event => {
@@ -62,6 +64,7 @@ class Home extends React.Component{
   };
 
   render(){
+    //check if url param sont presents
     const { classes } = this.props;
     return(
         <div>
@@ -69,6 +72,7 @@ class Home extends React.Component{
             <Grid container justify="center" spacing={8} direction="column" alignItems="center">
                 <Grid key="1" item>
                  <h1>Here, it's all about Link</h1>
+                 <h2>{this.props.match.params.user_name + " / "+ this.props.match.params.list_name}</h2>
                 </Grid>
                 <Grid key="2" item>
                  <img height="150" src="https://media.giphy.com/media/144Q1gg0FkTEVG/giphy.gif" alt="Dam link, where are you?"/>
@@ -94,7 +98,7 @@ class Home extends React.Component{
             </Grid>
             <Grid container justify="center" spacing={8}>
                 <Grid key="1" item>
-                  <Button variant="fab" mini disabled={!this.state.is_url_valide} onClick={()=>{this.props.add_link(this.state.url_to_add,this.props.user_name)}} color="secondary" aria-label="edit" className={classes.button}>
+                  <Button variant="fab" mini disabled={!this.state.is_url_valide} onClick={()=>{this.props.add_link(this.state.url_to_add,this.props.user_name,this.props.match.params.list_name)}} color="secondary" aria-label="edit" className={classes.button}>
                     <Icon>send</Icon>
                   </Button>  
                 </Grid>
@@ -118,7 +122,10 @@ class Home extends React.Component{
     if(this.state.is_first_render){
       this.setState({is_first_render : false});
     }
-    this.props.get_list_links();
+    this.props.get_list_links(this.props.match.params.list_name);
+  }
+  componentDidUpdate(){
+    console.log("did update")
   }
 }
 
@@ -134,12 +141,12 @@ const mapStateToProps = state =>({
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/about-us'),
   get_list_links,
-  add_link : (url,owner) => add_link(url,owner) 
+  add_link : (url,owner,list_name) => add_link(url,owner,list_name) 
 }, dispatch)
 
 
 var Home_ws = withStyles(styles)(Home);
-export default connect(
+export default  withRouter(connect(
   mapStateToProps, 
   mapDispatchToProps
-)(Home_ws)
+)(Home_ws))

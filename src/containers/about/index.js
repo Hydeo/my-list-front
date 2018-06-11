@@ -1,7 +1,10 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Route, Link } from 'react-router-dom'
 import {set_user} from '../../actions/user_actions'
+
+import Home from '../home'
 
 import Input from '@material-ui/core/Input';
 import { withStyles } from '@material-ui/core/styles';
@@ -60,18 +63,21 @@ class UserIdentification extends React.Component{
              		<Grid item xs={12}>
 						<Grid container className={classes.demo} justify="center" spacing={16}>
              					{this.props.user_list.map(list_name => (
-	             						<Grid key={list_name} item>
-	             								<Paper className={classes.paper}>
-	             									<Typography variant="headline" component="h3" align="center">
-											          {list_name}
-											        </Typography>
-	             								</Paper>
-	             						</Grid>
+             						<div>
+	             						<Link to={"/" +this.props.user_name + "/" + list_name}>
+		             						<Grid key={list_name} item>
+		             								<Paper className={classes.paper}>
+		             									<Typography variant="headline" component="h3" align="center">
+												          {list_name}
+												        </Typography>
+		             								</Paper>
+		             						</Grid>
+		             					</Link>
+             						</div>
              						))
              					}
              			</Grid>
              		</Grid>
-
               	</Grid>
 			</div>
 		)	

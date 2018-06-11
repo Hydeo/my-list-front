@@ -11,10 +11,10 @@ export const SET_ISOTOPE = 'SET_ISOTOPE'
 export const URL_API = "http://localhost:8080";
 export const LIST_NAME = "Hideo";
 
-export const get_list_links = ()=>{
+export const get_list_links = (list_name)=>{
 	//Redux Thunk will inject dispatch here
 	return dispatch =>{
-		return axios.get(URL_API+"/"+LIST_NAME+"/all")
+		return axios.get(URL_API+"/lists/"+list_name)
 			.then(
 				(request)=>{
 					dispatch({
@@ -26,14 +26,14 @@ export const get_list_links = ()=>{
 	}
 }
 
-export const add_link = (url,owner) =>{
+export const add_link = (url,owner,list_name) =>{
 
 	const data = {
       url: url
     };
     console.log(owner)
 	return dispatch =>{
-		return axios.post(URL_API+"/"+owner+"/lol",data)
+		return axios.post(URL_API+"/"+owner+"/"+list_name,data)
 			.then(
 				(request)=>{
 					dispatch({
