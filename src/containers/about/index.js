@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -31,12 +32,17 @@ class UserIdentification extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			user_name : ""
+			user_name : "",
+			new_list_name : ""
 		}
 	}
 
 	handleChange = (event) =>{
 		this.setState({user_name : event.target.value})
+	}
+
+	handleChangeNewListName = (event) =>{
+		this.setState({new_list_name : event.target.value})
 	}
 
 	render(){
@@ -77,6 +83,14 @@ class UserIdentification extends React.Component{
              						))
              					}
              			</Grid>
+             		</Grid>
+             		<Grid item xs={4} >
+             			<Input id="new_list_name" placeholder="List Name" value={this.state.new_list_name} onChange={this.handleChangeNewListName} />
+             			<Link to={"/" +this.props.user_name + "/" + this.state.new_list_name}>
+	             			<Button variant="fab" mini color="secondary" aria-label="edit">
+			                    <Icon>send</Icon>
+			              	</Button>
+		              	</Link>
              		</Grid>
               	</Grid>
 			</div>

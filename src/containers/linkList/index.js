@@ -63,9 +63,8 @@ class LinkList extends React.Component{
 
 
 	componentDidMount = ()=>{
-		//console.log("--["+class_name+"] componentDidMount--");
+		console.log("--["+class_name+"] componentDidMount--");
 		window.addEventListener("resize", this.updateDimensions);
-		this.setState({first_render: false});
 	}
 	
 	componentWillUnmount() {
@@ -83,9 +82,16 @@ class LinkList extends React.Component{
 	}
 
 	componentDidUpdate = (prevProps, prevState, snapshot) =>{
-		//console.log("--["+class_name+"] componentDidUpdate --")
+		console.log("--["+class_name+"] componentDidUpdate -- first_render: "+this.state.first_render)
 		//console.log(this.props);
-		this.props.update_isotope(this.props.isotope_instance);
+		
+		if(this.state.first_render == true){
+			this.setState({first_render: false});
+			this.props.update_isotope(this.props.isotope_instance,true);
+		}
+		else{
+			this.props.update_isotope(this.props.isotope_instance);
+		}
 	}
 
 }

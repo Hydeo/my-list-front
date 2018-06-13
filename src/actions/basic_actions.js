@@ -45,12 +45,13 @@ export const add_link = (url,owner,list_name) =>{
 	}
 }
 
-export const update_isotope = (iso_instance = null) =>{
+export const update_isotope = (iso_instance = null,force_new = false) =>{
 	return dispatch =>{
-		if(iso_instance == null){
+		if(iso_instance == null || force_new == true){
 			console.log("-- init_Isotope --");
 			var iso_link_list ;
 			var link_list = document.querySelector('#link_list');
+			console.log(document.querySelector('#link_list'));
 			//ImagesLoaded("#link_list"),()=>{
 			iso_link_list = new Isotope(link_list,{
 					itemSelector : ".link_item",
@@ -68,6 +69,7 @@ export const update_isotope = (iso_instance = null) =>{
 		}
 		else{
 			console.log("-- update_isotope -- update layout--");
+			console.log(document.querySelector('#link_list'));
 			iso_instance.reloadItems()
 			iso_instance.layout();
 			iso_instance.arrange();
