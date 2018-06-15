@@ -1,23 +1,27 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import {  Link } from 'react-router-dom'
 import {
 	update_isotope
 } from '../../actions/basic_actions'
 import {conf_dev} from '../../config';
 import {getTypeSizeScreen, calculateIsotopeItemWidth} from '../../utils'
-
+import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Collapse from '@material-ui/core/Collapse';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import LinkIcon from '@material-ui/icons/Link';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-const styles = {
+const styles = theme => ( {
   card: {
     marginBottom: "15px"
   },
@@ -25,7 +29,19 @@ const styles = {
     height: 0,
     paddingTop: '46.25%', // 16:9
   },
-};
+   expand: {
+    transform: 'rotate(0deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    })
+  },
+  marginAuto : {
+  	marginLeft: 'auto'
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+});
 
 
 class LinkCard extends React.Component{
@@ -74,12 +90,21 @@ class LinkCard extends React.Component{
 		        </CardContent>
 		    </Collapse>
 	        <CardActions>
-	          <Button size="small" color="primary">
-	            Share
-	          </Button>
-	          <Button onClick={this.handleExpandClick} size="small" color="primary">
-	            Open
-	          </Button>
+		        <IconButton
+	              className={classnames(classes.expand, {
+	                [classes.expandOpen]: this.state.expanded,
+	              })}
+	              onClick={this.handleExpandClick}
+	              aria-expanded={this.state.expanded}
+	              aria-label="Show more"
+	            >
+              		<ExpandMoreIcon />
+            	</IconButton>
+            	<a className={classes.marginAuto} target="_blank" href={link_data.url}>
+	            	<IconButton  color="primary">
+			        	<LinkIcon/>
+			        </IconButton>
+		        </a>
 	        </CardActions>
 	      </Card>
 	    </div>

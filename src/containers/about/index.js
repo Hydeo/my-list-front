@@ -26,13 +26,22 @@ const styles = theme => ({
   control: {
     padding: theme.spacing.unit * 2,
   },
+  center:{
+  	textAlign : "center"
+  },
+  gutter:{
+  	marginBottom : "5%" 
+  },
+  wordStyle : {
+  	wordBreak: "break-word"
+  },
 });
 
 class UserIdentification extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			user_name : "",
+			user_name : localStorage.getItem('user_name'),
 			new_list_name : ""
 		}
 	}
@@ -50,49 +59,75 @@ class UserIdentification extends React.Component{
 		console.log(this.props);
 		return(
 			<div>
-				<h1>
-					Prop : '{this.props.user_name}'
-				</h1>
-				<h1>
-					This : '{this.state.user_name}'
-				</h1>
-				<h1>
-					Storage : '{localStorage.getItem('user_name')}'
-				</h1>
+				<Grid item xs={12} >
+		            <Grid container justify="center" spacing={8} direction="column" alignItems="center">
+		                <Grid key="1" item>
+		                 <h1>Here, it's all about saving Links</h1>
+		                </Grid>
+		                <Grid key="2" item>
+		                 <img height="150" src="https://media.giphy.com/media/144Q1gg0FkTEVG/giphy.gif" alt="Dam link, where are you?"/>
+		                </Grid>
+		            </Grid>
+	          	</Grid>
+				<Grid container className={classes.center}>
+              			<Grid item xs={12}>
+              				<h2>User Name</h2>
+              				<p>Retrieve all list with at least one contribution by this user </p>
+              			</Grid>
+              			<Grid item xs={12}>
+							<Input id="name-simple"  placeholder="User Name" value={this.state.user_name} onChange={this.handleChange} />
+			              	<Button variant="fab" mini onClick={()=>{this.props.set_user(this.state.user_name)}} color="secondary" aria-label="edit">
+			                    <Icon>send</Icon>
+			              	</Button>
+              			</Grid>
+              	</Grid>
 
-				<Input id="name-simple"  placeholder="User Name" value={this.state.user_name} onChange={this.handleChange} />
-              	<Button variant="fab" mini onClick={()=>{this.props.set_user(this.state.user_name)}} color="secondary" aria-label="edit">
-                    <Icon>send</Icon>
-              	</Button> 
+              	<Grid container className={classes.gutter}>
+              			<Grid item xs={12}>
+              			</Grid>
+              	</Grid>
 
               	<Grid container className={classes.root} spacing={16}>
+              		<Grid item xs={12}>
+		              	<Grid container className={classes.center} justify="center" >
+			              	<Grid item xs={12}>
+	              				<h2>Create a new list</h2>
+	              			</Grid>
+		         			<Grid item  xs={12}>
+		             			<Input id="new_list_name" placeholder="List Name" value={this.state.new_list_name} onChange={this.handleChangeNewListName} />
+		             			<Link to={"/" +this.props.user_name + "/" + this.state.new_list_name}>
+			             			<Button variant="fab" mini color="secondary" aria-label="edit">
+					                    <Icon>send</Icon>
+					              	</Button>
+				              	</Link>
+			              	</Grid>
+		         		</Grid>
+              		</Grid>
              		<Grid item xs={12}>
-						<Grid container className={classes.demo} justify="center" spacing={16}>
+						<Grid container  justify="center" spacing={16}>
              					{this.props.user_list.map(list_name => (
-             						<div>
-	             						<Link to={"/" +this.props.user_name + "/" + list_name}>
-		             						<Grid key={list_name} item>
-		             								<Paper className={classes.paper}>
-		             									<Typography variant="headline" component="h3" align="center">
-												          {list_name}
-												        </Typography>
-		             								</Paper>
+		             						<Grid item  xs={12} sm={6} md={4} lg={3} key={list_name}>
+		             							<div className={classes.wordStyle}>
+	             									<Link to={"/" +this.props.user_name + "/" + list_name}>
+			             								<Paper className={classes.paper}>
+			             									<Typography variant="headline" component="h3" align="center">
+													          {list_name}
+													        </Typography>
+			             								</Paper>
+						             					</Link>
+			             						</div>
 		             						</Grid>
-		             					</Link>
-             						</div>
              						))
              					}
              			</Grid>
              		</Grid>
-             		<Grid item xs={4} >
-             			<Input id="new_list_name" placeholder="List Name" value={this.state.new_list_name} onChange={this.handleChangeNewListName} />
-             			<Link to={"/" +this.props.user_name + "/" + this.state.new_list_name}>
-	             			<Button variant="fab" mini color="secondary" aria-label="edit">
-			                    <Icon>send</Icon>
-			              	</Button>
-		              	</Link>
-             		</Grid>
               	</Grid>
+
+              	<Grid container className={classes.gutter}>
+              			<Grid item xs={12}>
+              			</Grid>
+              	</Grid>
+
 			</div>
 		)	
 	}

@@ -36,6 +36,9 @@ const styles = theme => ({
   button: {
     margin: 10
   },
+  gutter:{
+    marginBottom : "5%" 
+  },
 });
 
 const class_name = "Home";
@@ -69,22 +72,6 @@ class Home extends React.Component{
     return(
         <div>
           <Grid item xs={12} >
-            <Grid container justify="center" spacing={8} direction="column" alignItems="center">
-                <Grid key="1" item>
-                 <h1>Here, it's all about Link</h1>
-                 <h2>{this.props.match.params.user_name + " / "+ this.props.match.params.list_name}</h2>
-                </Grid>
-                <Grid key="2" item>
-                 <img height="150" src="https://media.giphy.com/media/144Q1gg0FkTEVG/giphy.gif" alt="Dam link, where are you?"/>
-                </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} >
-            <Grid container justify="center" spacing={8}>
-                <Grid key="1" item>
-                  <button onClick={() => this.props.changePage()}>[TEST] Change Page</button>
-                </Grid>
-            </Grid>
             <Grid container justify="center" spacing={8}>
                 <Grid key="1" xs={6} sm={4} item>
                   <FormControl fullWidth className={classes.formControl}>
@@ -103,15 +90,11 @@ class Home extends React.Component{
                   </Button>  
                 </Grid>
             </Grid>
-            <Grid container justify="center" spacing={8}>
-                <Grid key="1" item>
-                  <Button onClick={this.props.get_list_links} className={classes.button} variant="raised" color="primary">  
-                    <Icon className={classes.rightIcon}>autorenew</Icon>
-                  </Button>           
-                </Grid>
+          </Grid>
+          <Grid container className={classes.gutter}>
+            <Grid item xs={12}>
             </Grid>
           </Grid>
-
          	<LinkList/>
         </div>
       )

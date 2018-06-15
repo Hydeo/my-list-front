@@ -9,7 +9,6 @@ export const SET_ISOTOPE = 'SET_ISOTOPE'
 
 //export const URL_API = "https://my-link-list.herokuapp.com";
 export const URL_API = "http://localhost:8080";
-export const LIST_NAME = "Hideo";
 
 export const get_list_links = (list_name)=>{
 	//Redux Thunk will inject dispatch here
