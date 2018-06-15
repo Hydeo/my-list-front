@@ -13,7 +13,8 @@ import Icon from '@material-ui/core/Icon';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormControl';
 
 const styles = theme => ({
   root: {
@@ -35,6 +36,12 @@ const styles = theme => ({
   wordStyle : {
   	wordBreak: "break-word"
   },
+  formControl : {
+  	    flexDirection: "unset"
+  },
+  formControlTextHelper : {
+  	    flexDirection: "column"
+  }
 });
 
 class UserIdentification extends React.Component{
@@ -94,12 +101,17 @@ class UserIdentification extends React.Component{
 	              				<h2>Create a new list</h2>
 	              			</Grid>
 		         			<Grid item  xs={12}>
-		             			<Input id="new_list_name" placeholder="List Name" value={this.state.new_list_name} onChange={this.handleChangeNewListName} />
-		             			<Link to={"/" +this.props.user_name + "/" + this.state.new_list_name}>
-			             			<Button variant="fab" mini color="secondary" aria-label="edit">
-					                    <Icon>send</Icon>
-					              	</Button>
-				              	</Link>
+		         				<FormControl >
+			             			<Input id="new_list_name" error={this.state.user_name == ""} placeholder="List Name" value={this.state.new_list_name} onChange={this.handleChangeNewListName} />
+			             			 {(this.state.user_name == "") &&
+					                      <FormHelperText className={classes.formControlTextHelper} id="name-error-text">User Name must be filled</FormHelperText>
+					                    }
+					            </FormControl>
+					            <Link to={"/" +this.props.user_name + "/" + this.state.new_list_name}>
+				             			<Button disabled={this.state.user_name == ""} variant="fab" mini color="secondary" aria-label="edit">
+						                    <Icon>send</Icon>
+						              	</Button>
+					            </Link>
 			              	</Grid>
 		         		</Grid>
               		</Grid>
