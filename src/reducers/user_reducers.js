@@ -5,7 +5,7 @@ USER_LIST
 
 const initialState = {
 	user_name : localStorage.getItem('user_name'),
-	user_list : ["qdzhqzhdiu","quand il prout il fait des pet","qjdjdjpqzdjj","oqkzd koqzkd opzqk ", "kiqjzidjd 15","jqjhzuhqzd", "iqjzdiuhqzihduqhduiqzhduhqzidhuqzhdoiuqzhzdbqzhbqzd uqzhd uqhzdhzqudhkqzhd jqzhd "]
+	user_list : []
 }
 
 export default (state = initialState, action ) =>{
