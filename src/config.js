@@ -1,4 +1,5 @@
 export const conf_dev = {
+	url_api : "https://my-link-list.herokuapp.com",
 	breakpoints : {
 		S : 600, 
 		M : 900, 

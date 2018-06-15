@@ -1,6 +1,8 @@
 import axios from 'axios'
 import Isotope from 'isotope-layout';
 
+import {conf_dev} from '../config';
+
 export const GET_LIST_LINKS = 'GET_LIST_LINKS'
 export const ADD_LINK = 'ADD_LINK'
 export const INIT_ISOTOPE = 'INIT_ISOTOPE'
@@ -8,7 +10,7 @@ export const UPDATE_ISOTOPE = 'UPDATE_ISOTOPE'
 export const SET_ISOTOPE = 'SET_ISOTOPE'
 
 //export const URL_API = "https://my-link-list.herokuapp.com";
-export const URL_API = "http://localhost:8080";
+export const URL_API = conf_dev.url_api;
 
 export const get_list_links = (list_name)=>{
 	//Redux Thunk will inject dispatch here
