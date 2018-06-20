@@ -8,6 +8,8 @@ import {
 import {conf_dev} from '../../config';
 import {getTypeSizeScreen, calculateIsotopeItemWidth} from '../../utils'
 import classnames from 'classnames';
+import LazyLoad from 'react-lazyload';
+
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -41,6 +43,9 @@ const styles = theme => ( {
   expandOpen: {
     transform: 'rotate(180deg)',
   },
+  test: {
+    backgroundImage: "url(http://via.placeholder.com/350x150)",
+  },
 });
 
 
@@ -69,14 +74,19 @@ class LinkCard extends React.Component{
 
 	render(){
 		const {classes, link_data} = this.props;
+		console.log(this.props.cardSize)
 		return (
 		<div className={" link_item "} style={this.props.cardSize}>
 	      <Card className={classes.card}>
-	        <CardMedia
-	          className={classes.media}
-	          image={link_data.image}
-	          title={link_data.title}
-	        />
+	      	<LazyLoad  className="qzd" offset={0}>
+	      		<div className={classes.test}>
+			        <CardMedia
+			          className={classes.media}
+			          image={link_data.image}
+			          title={link_data.title}
+			        />
+		        </div>		
+	        </LazyLoad>
 	        <CardContent>
 	          <Typography gutterBottom variant="headline" component="h2">
 	            {link_data.title}

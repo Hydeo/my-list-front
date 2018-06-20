@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Isotope from 'isotope-layout';
+import { forceCheck } from 'react-lazyload';
 
 import {conf_dev} from '../config';
 
@@ -75,6 +76,8 @@ export const update_isotope = (iso_instance = null,force_new = false) =>{
 			iso_instance.layout();
 			iso_instance.arrange();
 		}
+		//Force check lazyload after isotope layout has been created
+		//forceCheck();
 	}
 }
 
