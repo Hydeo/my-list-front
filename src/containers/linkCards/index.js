@@ -9,6 +9,7 @@ import {conf_dev} from '../../config';
 import {getTypeSizeScreen, calculateIsotopeItemWidth} from '../../utils'
 import classnames from 'classnames';
 import LazyLoad from 'react-lazyload';
+import dice_spinner from "../../medias/spinner_dice.gif";		
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -44,7 +45,10 @@ const styles = theme => ( {
     transform: 'rotate(180deg)',
   },
   test: {
-    backgroundImage: "url(http://via.placeholder.com/350x150)",
+  	backgroundSize : "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundImage: "url("+dice_spinner+")",
   },
 });
 
@@ -74,7 +78,6 @@ class LinkCard extends React.Component{
 
 	render(){
 		const {classes, link_data} = this.props;
-		console.log(this.props.cardSize)
 		return (
 		<div className={" link_item "} style={this.props.cardSize}>
 	      <Card className={classes.card}>
