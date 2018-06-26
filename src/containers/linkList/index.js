@@ -12,6 +12,7 @@ import {
 	set_isotope
 } from '../../actions/basic_actions'
 
+import ConfirmDialog from '../../components/ConfirmDialog'; 
 import {conf_dev} from '../../config';
 import {getTypeSizeScreen,calculateIsotopeItemWidth} from '../../utils'
 import LinkCard from '../linkCards'
@@ -32,8 +33,19 @@ class LinkList extends React.Component{
 			isotope_instance : null,
 			link_size_state : {
 				width : calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
+			},
+			confirm_dialog_state : {
+				title : "",
+				description : "",
+				open : false,
+				agree_callback : null,
+				desagree_callback : null
 			}
 		}
+	}
+
+	update_confirm_dialog_state = (newState)=>{
+		this.setState({confirm_dialog_state : newState});
 	}
 
 	updateDimensions = ()=>{
@@ -54,9 +66,10 @@ class LinkList extends React.Component{
 			  	<div  style={link_gutter} className="link_gutter"/>
 			    {
 			    	this.props.links.map((link,index)=>(
-			    		<LinkCard link_data={link} key={index} isotopeUpdate={this.update_isotope} cardSize={this.state.link_size_state}/>
+			    		<LinkCard link_data={link} key={index} isotopeUpdate={this.update_isotope} cardSize={this.state.link_size_state} update={this.update_confirm_dialog_state}/>
 			  		))
 			    }
+			    <ConfirmDialog parentState={this.state.confirm_dialog_state} update={this.update_confirm_dialog_state} />
 			  </div>
 		)
 	}

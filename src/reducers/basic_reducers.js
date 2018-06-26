@@ -1,6 +1,7 @@
 import { 
 GET_LIST_LINKS,
 ADD_LINK,
+DELETE_LINK,
 UPDATE_ISOTOPE,
 SET_ISOTOPE
 } from '../actions/basic_actions';
@@ -30,6 +31,19 @@ export default (state = initialState, action ) =>{
 					links : [action.payload.data , ...state.links],
 					last_added_link : action.payload.data 
 				}
+			break;
+		case DELETE_LINK:
+
+			var index =  state.links.findIndex(function(item) {
+			    return item.id === action.idLink;
+			});
+			return{
+				...state,
+				links : [
+							...state.links.slice(0,index),
+							...state.links.slice(index+1)
+						],
+			}
 			break;
 
 		case UPDATE_ISOTOPE:

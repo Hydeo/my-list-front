@@ -6,6 +6,7 @@ import {conf_dev} from '../config';
 
 export const GET_LIST_LINKS = 'GET_LIST_LINKS'
 export const ADD_LINK = 'ADD_LINK'
+export const DELETE_LINK = 'DELETE_LINK'
 export const INIT_ISOTOPE = 'INIT_ISOTOPE'
 export const UPDATE_ISOTOPE = 'UPDATE_ISOTOPE'
 export const SET_ISOTOPE = 'SET_ISOTOPE'
@@ -33,7 +34,6 @@ export const add_link = (url,owner,list_name) =>{
 	const data = {
       url: url
     };
-    console.log(owner)
 	return dispatch =>{
 		return axios.post(URL_API+"/"+owner+"/"+list_name,data)
 			.then(
@@ -42,6 +42,21 @@ export const add_link = (url,owner,list_name) =>{
 						type : ADD_LINK,
 						payload : request
 					});
+				}
+			)
+	}
+}
+
+export const delete_link = (idLink) =>{
+	return dispatch =>{
+		return axios.delete(URL_API+"/"+idLink)
+			.then(
+				(request)=>{
+					dispatch({
+						type : DELETE_LINK,
+						payload : request,
+						idLink : idLink
+					})
 				}
 			)
 	}
@@ -77,7 +92,7 @@ export const update_isotope = (iso_instance = null,force_new = false) =>{
 			iso_instance.arrange();
 		}
 		//Force check lazyload after isotope layout has been created
-		//forceCheck();
+		forceCheck();
 	}
 }
 
