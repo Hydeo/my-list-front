@@ -53,7 +53,6 @@ class Home extends React.Component{
       is_url_valide : false,
       url_input_has_been_used : false
     };
-    console.log("construct home")
   }
 
   handleChange = event => {
@@ -101,14 +100,12 @@ class Home extends React.Component{
   }
 
   componentDidMount(){
-    console.log("--["+class_name+"] componentWillReceiveProps --")
     if(this.state.is_first_render){
       this.setState({is_first_render : false});
     }
     this.props.get_list_links(this.props.match.params.list_name);
   }
   componentDidUpdate(){
-    console.log("did update")
   }
 }
 

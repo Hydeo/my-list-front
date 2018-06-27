@@ -31,6 +31,8 @@ export const get_list_links = (list_name)=>{
 
 export const add_link = (url,owner,list_name) =>{
 
+	if(!url.includes("http"))
+		url = "http://"+url;
 	const data = {
       url: url
     };

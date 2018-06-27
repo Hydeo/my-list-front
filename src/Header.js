@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import randomColor from 'randomcolor'
 import { Link } from 'react-router-dom'
 
-class Header extends Component {
+class App extends Component {
   render() {
     return (
       <div className="App" style={{backgroundColor : randomColor({luminosity: 'dark'})}}>
@@ -20,4 +20,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default App;

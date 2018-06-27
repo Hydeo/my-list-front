@@ -11,7 +11,7 @@ import App2 from './containers/app'
 
 ReactDOM.render(
 	<div>
-		<App />
+		
 		<Provider store={store}>
 			<ConnectedRouter history={history}>
 				<div>

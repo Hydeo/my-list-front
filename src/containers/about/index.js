@@ -54,7 +54,7 @@ class UserIdentification extends React.Component{
 	}
 
 	handleChange = (event) =>{
-		this.setState({user_name : event.target.value})
+		this.setState({user_name : event.target.value.toLowerCase()})
 	}
 
 	handleChangeNewListName = (event) =>{

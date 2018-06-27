@@ -111,8 +111,7 @@ class LinkCard extends React.Component{
 		        </CardContent>
 		    </Collapse>
 	        <CardActions>
-
-	        	<IconButton onClick={()=>{this.props.update({title:"Delete "+link_data.title,description:"D: "+link_data.id, open:true, agree_callback : ()=>{this.props.delete_link(link_data.id)}});}}>
+	        	<IconButton onClick={()=>{this.props.update({title:"Delete '"+link_data.title+"' ?",description:"Url : "+link_data.url, open:true, agree_callback : ()=>{this.props.delete_link(link_data.id)}});}}>
               		<Delete color="error"/>
             	</IconButton>
 

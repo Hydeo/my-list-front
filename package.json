@@ -11,6 +11,7 @@
     "imagesloaded": "^4.1.4",
     "isotope-layout": "^3.0.6",
     "jquery": "^3.3.1",
+    "randomcolor": "^0.5.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-lazyload": "^2.3.0",
