@@ -14,7 +14,7 @@ import {
 
 import ConfirmDialog from '../../components/ConfirmDialog'; 
 import {conf_dev} from '../../config';
-import {getTypeSizeScreen,calculateIsotopeItemWidth} from '../../utils'
+import Utils from '../../modules/utils.js'
 import LinkCard from '../linkCards'
 
 const class_name = "LinkList";
@@ -32,7 +32,7 @@ class LinkList extends React.Component{
 			first_render : true,
 			isotope_instance : null,
 			link_size_state : {
-				width : calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
+				width : Utils.calculateIsotopeItemWidth(3)+"%"
 			},
 			confirm_dialog_state : {
 				title : "",
@@ -52,7 +52,7 @@ class LinkList extends React.Component{
 		if(!this.state.first_render){
 			//TODO : Debounce ?
 			this.setState({link_size_state : {
-					width : calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
+					width : Utils.calculateIsotopeItemWidth(3)+"%"
 				}
 			});
 		}

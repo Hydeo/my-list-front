@@ -1,4 +1,4 @@
-
+import {conf_dev} from '../config';
 
 class Utils{
 
@@ -14,6 +14,28 @@ class Utils{
 		          return false;
 		        }
 		}
+
+
+
+	static getTypeSizeScreen (breakpoints, screen_width){
+		if(screen_width < breakpoints.S)
+			return "S";
+		if(screen_width < breakpoints.M)
+			return "M";
+		if(screen_width < breakpoints.L)
+			return "L";
+		return "L";
+	}
+
+	static calculateIsotopeItemWidth (gutter_size){
+		var nb_item = conf_dev.isotope_nb_item[Utils.getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)];
+		var nb_gutters = nb_item-1;
+		var item_width = (100 - (nb_gutters * gutter_size)) / nb_item;
+		console.log("URILS :  "+item_width )
+		return item_width;
+	}
+
+
 }
 
 export default Utils

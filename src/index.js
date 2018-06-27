@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import store, {history} from './store'
-import App2 from './containers/app'
+import App from './containers/app'
 
 
 ReactDOM.render(
@@ -15,7 +13,7 @@ ReactDOM.render(
 		<Provider store={store}>
 			<ConnectedRouter history={history}>
 				<div>
-					<App2/>
+					<App/>
 				</div>
 			</ConnectedRouter>
 		</Provider>

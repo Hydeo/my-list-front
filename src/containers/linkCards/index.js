@@ -7,10 +7,11 @@ import {
 	delete_link
 } from '../../actions/basic_actions'
 import {conf_dev} from '../../config';
-import {getTypeSizeScreen, calculateIsotopeItemWidth} from '../../utils'
+import Utils from '../../modules/utils.js'
 import classnames from 'classnames';
 import LazyLoad from 'react-lazyload';
 import dice_spinner from "../../medias/spinner_dice.gif";
+import pic_404 from "../../medias/404.jpg";
 
 
 import Card from '@material-ui/core/Card';
@@ -64,9 +65,6 @@ class LinkCard extends React.Component{
 		super(props);
 		this.state = {
 			expanded: false,
-			card_size : {
-				width : calculateIsotopeItemWidth(conf_dev.isotope_nb_item[getTypeSizeScreen(conf_dev.breakpoints,window.screen.width)],3)+"%"
-			}
 		}
 	}
 
@@ -84,6 +82,8 @@ class LinkCard extends React.Component{
 	render(){
 		
 		const {classes, link_data} = this.props;
+		if(link_data.image == null || link_data.image == undefined || !link_data.image.includes("http"))
+			link_data.image=pic_404;
 		return (
 		<div className={" link_item "} style={this.props.cardSize}>
 	      <Card className={classes.card}>
@@ -91,7 +91,7 @@ class LinkCard extends React.Component{
 	      		<div>
 		      		<a target="_blank" href={link_data.url}>
 				        <CardMedia
-				          className={classes.loadingBackgound +' '+classes.media}
+				          className={classes.media +' '+classes.loadingBackgound}
 				          image={link_data.image}
 				          title={link_data.title}
 				        />

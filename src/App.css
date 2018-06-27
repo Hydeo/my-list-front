@@ -25,3 +25,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.lazyload-placeholder {padding-top: 100%;}
+
+a {
+  text-decoration: none;
+}
