@@ -1,5 +1,6 @@
 export const conf_dev = {
-	url_api : "https://linkitlist-back.herokuapp.com/",
+	//url_api : "https://linkitlist-back.herokuapp.com/",
+	url_api : "http://localhost:8080/",
 	breakpoints : {
 		S : 600, 
 		M : 900, 

@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import {  Link } from 'react-router-dom'
 import {
 	update_isotope,
-	delete_link
+	delete_link,
+	upvote
 } from '../../actions/basic_actions'
 import {conf_dev} from '../../config';
 import Utils from '../../modules/utils.js'
@@ -24,6 +25,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Delete from '@material-ui/icons/Delete';
 import LinkIcon from '@material-ui/icons/Link';
+import ThumbUp from '@material-ui/icons/ThumbUp';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -84,6 +86,7 @@ class LinkCard extends React.Component{
 		const {classes, link_data} = this.props;
 		if(link_data.image == null || link_data.image == undefined || !link_data.image.includes("http"))
 			link_data.image=pic_404;
+	            			
 		return (
 		<div className={" link_item "} style={this.props.cardSize}>
 	      <Card className={classes.card}>
@@ -116,11 +119,17 @@ class LinkCard extends React.Component{
             	</IconButton>
 
 
-	            <a target="_blank" href={link_data.url} className={classes.marginAuto}>
-	            	<IconButton  color="primary">
-			        	<LinkIcon/>
+	            <a className={classes.marginAuto}>
+	            	<IconButton  color="primary" onClick={()=>{this.props.upvote(link_data.id)}}>
+			        	<ThumbUp/>
+			        	<Typography gutterBottom variant="headline" component="h2">
+	            			{link_data.vote == null ? 0 : link_data.vote}
+	          			</Typography>
 			        </IconButton>
+			        
 		        </a>
+		        
+		        
             	<IconButton
 	              className={classnames(classes.expand,classes.marginAuto, {
 	                [classes.expandOpen]: this.state.expanded,
@@ -152,7 +161,8 @@ const mapStateToProps = state =>({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   update_isotope,
-  delete_link
+  delete_link,
+  upvote
 }, dispatch)
 
 const compoStyled = withStyles(styles)(LinkCard);

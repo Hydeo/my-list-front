@@ -7,6 +7,7 @@ import {conf_dev} from '../config';
 export const GET_LIST_LINKS = 'GET_LIST_LINKS'
 export const ADD_LINK = 'ADD_LINK'
 export const DELETE_LINK = 'DELETE_LINK'
+export const UPVOTE = 'UPVOTE'
 export const INIT_ISOTOPE = 'INIT_ISOTOPE'
 export const UPDATE_ISOTOPE = 'UPDATE_ISOTOPE'
 export const SET_ISOTOPE = 'SET_ISOTOPE'
@@ -56,6 +57,21 @@ export const delete_link = (idLink) =>{
 				(request)=>{
 					dispatch({
 						type : DELETE_LINK,
+						payload : request,
+						idLink : idLink
+					})
+				}
+			)
+	}
+}
+
+export const upvote = (idLink) =>{
+	return dispatch =>{
+		return axios.post(URL_API+"/"+idLink)
+			.then(
+				(request)=>{
+					dispatch({
+						type : UPVOTE,
 						payload : request,
 						idLink : idLink
 					})
