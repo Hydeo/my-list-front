@@ -94,7 +94,12 @@ export const update_isotope = (iso_instance = null,force_new = false) =>{
 					masonry : {
 						 columnWidth: ".link_sizer",
 						 gutter : ".link_gutter"
-					}
+					},
+					getSortData: {
+				    	vote: '[nb-vote] parseInt'
+				  	},
+					sortBy: ['vote'],
+					sortAscending: false
 				})
 			//}
 			dispatch({

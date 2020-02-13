@@ -67,6 +67,7 @@ class LinkCard extends React.Component{
 		super(props);
 		this.state = {
 			expanded: false,
+			vote : this.props.link_data.vote != null ? this.props.link_data.vote : 0 
 		}
 	}
 
@@ -88,7 +89,7 @@ class LinkCard extends React.Component{
 			link_data.image=pic_404;
 	            			
 		return (
-		<div className={" link_item "} style={this.props.cardSize}>
+		<div className={" link_item "} nb-vote={this.state.vote} style={this.props.cardSize}>
 	      <Card className={classes.card}>
 	      	<LazyLoad  className="qzd" offset={0}>
 	      		<div>
@@ -120,10 +121,14 @@ class LinkCard extends React.Component{
 
 
 	            <a className={classes.marginAuto}>
-	            	<IconButton  color="primary" onClick={()=>{this.props.upvote(link_data.id)}}>
+	            	<IconButton  color="primary" onClick={()=>{
+	            		this.setState({vote : this.state.vote+1})
+	            		this.props.upvote(link_data.id)}}>
 			        	<ThumbUp/>
 			        	<Typography gutterBottom variant="headline" component="h2">
-	            			{link_data.vote == null ? 0 : link_data.vote}
+			        	
+	            			{this.state.vote == null ? 0 : this.state.vote}
+	            		
 	          			</Typography>
 			        </IconButton>
 			        
@@ -148,6 +153,7 @@ class LinkCard extends React.Component{
 	}
 
 	componentDidUpdate = ()=>{
+		console.log("link updated");
 	}
 
 }
@@ -155,7 +161,8 @@ class LinkCard extends React.Component{
 
 //On recupere la tate dans les props
 const mapStateToProps = state =>({
-	isotope_instance : state.bim.isotope_instance
+	isotope_instance : state.bim.isotope_instance,
+	links : state.bim.links
 })
 
 
