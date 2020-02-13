@@ -19,11 +19,12 @@ export default (state = initialState, action ) =>{
 	switch(action.type){
 
 		case GET_LIST_LINKS:
+				var new_state = Object.assign({}, state);
+				new_state["test_action"] = state.test_action +  1;
+				new_state["snapdragon"] = !state.snapdragon;
+				new_state["links"] = action.payload.data; 
 				return{
-					...state,
-					test_action : state.test_action +  1,
-					snapdragon : !state.snapdragon,
-					links : action.payload.data
+					...new_state
 				}
 			break;
 
@@ -63,12 +64,15 @@ export default (state = initialState, action ) =>{
 			var index =  new_state.links.findIndex(function(item) {
 				    return item.id === action.idLink;
 				});
-			new_state.links[index] = action.payload.data;
+			var new_links = Object.assign([], new_state.links);
+			new_links[index] = action.payload.data;
+
 			new_state.isotope_instance.reloadItems();
 			new_state.isotope_instance.layout();
 			new_state.isotope_instance.arrange();
 			return{
-				...new_state
+				...new_state,
+				links : new_links
 			}
 		break;
 

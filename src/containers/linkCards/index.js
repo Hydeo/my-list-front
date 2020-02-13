@@ -65,9 +65,10 @@ class LinkCard extends React.Component{
 
 	constructor(props){
 		super(props);
+		var nb_vote = this.props.link_data.vote != null ? this.props.link_data.vote : 0 
 		this.state = {
 			expanded: false,
-			vote : this.props.link_data.vote != null ? this.props.link_data.vote : 0 
+			vote : nb_vote
 		}
 	}
 
@@ -87,9 +88,9 @@ class LinkCard extends React.Component{
 		const {classes, link_data} = this.props;
 		if(link_data.image == null || link_data.image == undefined || !link_data.image.includes("http"))
 			link_data.image=pic_404;
-	            			
+		       			
 		return (
-		<div className={" link_item "} nb-vote={this.state.vote} style={this.props.cardSize}>
+		<div className={" link_item "} nb-vote={this.props.link_data.vote == null ? 0 : this.props.link_data.vote} style={this.props.cardSize}>
 	      <Card className={classes.card}>
 	      	<LazyLoad  className="qzd" offset={0}>
 	      		<div>
@@ -122,12 +123,11 @@ class LinkCard extends React.Component{
 
 	            <a className={classes.marginAuto}>
 	            	<IconButton  color="primary" onClick={()=>{
-	            		this.setState({vote : this.state.vote+1})
 	            		this.props.upvote(link_data.id)}}>
 			        	<ThumbUp/>
 			        	<Typography gutterBottom variant="headline" component="h2">
 			        	
-	            			{this.state.vote == null ? 0 : this.state.vote}
+	            			{this.props.link_data.vote}
 	            		
 	          			</Typography>
 			        </IconButton>
@@ -153,7 +153,7 @@ class LinkCard extends React.Component{
 	}
 
 	componentDidUpdate = ()=>{
-		console.log("link updated");
+		
 	}
 
 }
